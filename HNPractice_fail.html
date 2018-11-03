@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <ol></ol>
+
+  <!-- <script type="text/javascript">
+    var ol = document.querySelector("ol");
+    var baseURL = "https://hacker-news.firebaseio.com/v0/topstories.json";
+    var temp = [];
+
+    fetch(baseURL)
+    .then(function(baseResponse) {
+      return baseResponse.json();
+    })
+    .then(function(data) {
+      for (var i = 0; i < 10; i++) {
+        var url = "https://hacker-news.firebaseio.com/v0/item/" + data[i] + ".json";
+        console.log(data[i]);
+        console.log(url);
+
+        fetch(url)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(item) {
+          var list = document.createElement("li");
+          list.innerText =item.id + item.by + item.title + item.url;
+
+          ol.append(list);
+        });
+      }
+    });
+  </script> -->
+
+  <script type="text/javascript">
+    var ol = document.querySelector("ol");
+    var baseURL = "https://hacker-news.firebaseio.com/v0/topstories.json";
+    var temp= [];
+
+    fetch(baseURL)
+    .then(function(baseResponse) {
+      return baseResponse.json();
+    })
+    .then(function(data) {
+      for (var i = 0; i < 10; i++) {
+        var list = document.createElement("li");
+        ol.append(list);
+
+        var url = "https://hacker-news.firebaseio.com/v0/item/" + data[i] + ".json";
+        console.log(i + 1, data[i]);
+
+        makeList(url, i);
+      }
+    });
+
+    function makeList(url, j) {
+      fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        ol.childNodes[j].innerText = data.id;
+      });
+    }
+  </script>
+</body>
+</html>
